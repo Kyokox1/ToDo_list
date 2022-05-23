@@ -31,7 +31,7 @@ export const TodoList = ({ todoTask, deleteTodo }) => {
 							<Text>{task.body}</Text>
 							<IconButton
 								icon={<FaTrash />}
-                                isRound="true"
+								isRound="true"
 								onClick={() => deleteTodo(task.id)}
 							/>
 						</HStack>

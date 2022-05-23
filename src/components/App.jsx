@@ -1,7 +1,15 @@
-import { Box, Heading, Stack } from "@chakra-ui/react";
+import {
+	Box,
+	Heading,
+	IconButton,
+	Stack,
+	useColorMode
+} from "@chakra-ui/react";
 import React, { useState } from "react";
-import { AddTodo } from "./sections/AddTodo";
+import { BsMoonStarsFill, BsSunFill } from "react-icons/bs";
+
 import { TodoList } from "./sections/TodoList";
+import { AddTodo } from "./sections/AddTodo";
 
 function App() {
 	const tasks = [
@@ -21,9 +29,13 @@ function App() {
 		setTodoTask(newTodos);
 	};
 
+	// ?Theme Dark and Ligth
+
+	const { colorMode, toggleColorMode } = useColorMode();
+
 	return (
 		<>
-			<Box as="main" pt="70px">
+			<Box as="main" pt="70px" pos="relative">
 				<Stack align="center" gap={6}>
 					<Heading
 						as="h1"
@@ -38,6 +50,18 @@ function App() {
 
 					<AddTodo addTodo={addTodo} />
 				</Stack>
+
+				<IconButton
+					icon={
+						colorMode === "light" ? <BsMoonStarsFill /> : <BsSunFill />
+					}
+					onClick={toggleColorMode}
+					pos="absolute"
+					top="1vh"
+					right="1vw"
+					isRound="true"
+					zIndex="100"
+				/>
 			</Box>
 		</>
 	);
