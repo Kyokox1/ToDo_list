@@ -5,10 +5,10 @@ import { TodoList } from "./sections/TodoList";
 
 function App() {
 	const tasks = [
-		{ id: 1, body: "Hacer la cama" },
-		{ id: 2, body: "Alimentar al gato" },
-		{ id: 3, body: "Almorzar" },
-		{ id: 4, body: "Hacer algo" }
+		{ id: 1, body: "make the bed" },
+		{ id: 2, body: "Feed the cat" },
+		{ id: 3, body: "Eat breakfast" },
+		{ id: 4, body: "Program" }
 	];
 	const [todoTask, setTodoTask] = useState(tasks);
 
@@ -22,8 +22,8 @@ function App() {
 	};
 
 	return (
-		<Box>
-			<main>
+		<>
+			<Box as="main" pt="70px">
 				<Stack align="center" gap={6}>
 					<Heading
 						as="h1"
@@ -38,8 +38,8 @@ function App() {
 
 					<AddTodo addTodo={addTodo} />
 				</Stack>
-			</main>
-		</Box>
+			</Box>
+		</>
 	);
 }
 

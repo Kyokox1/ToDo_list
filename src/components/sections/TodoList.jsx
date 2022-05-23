@@ -8,6 +8,7 @@ import {
 	Text
 } from "@chakra-ui/react";
 import React from "react";
+import { FaTrash } from "react-icons/fa";
 
 export const TodoList = ({ todoTask, deleteTodo }) => {
 	return (
@@ -28,7 +29,11 @@ export const TodoList = ({ todoTask, deleteTodo }) => {
 							// borderBottom={i !== todoTask.length - 1 && "2px #00000020 solid"} //* Solucion sin aplicar el "StackDivider" de arriba.
 						>
 							<Text>{task.body}</Text>
-							<IconButton onClick={() => deleteTodo(task.id)} />
+							<IconButton
+								icon={<FaTrash />}
+                                isRound="true"
+								onClick={() => deleteTodo(task.id)}
+							/>
 						</HStack>
 					))}
 				</Stack>
