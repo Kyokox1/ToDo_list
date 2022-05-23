@@ -5,7 +5,7 @@ import {
 	Stack,
 	useColorMode
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsMoonStarsFill, BsSunFill } from "react-icons/bs";
 
 import { TodoList } from "./sections/TodoList";
@@ -18,8 +18,17 @@ function App() {
 		{ id: 3, body: "Eat breakfast" },
 		{ id: 4, body: "Program" }
 	];
-	const [todoTask, setTodoTask] = useState(tasks);
 
+	// const [todoTask, setTodoTask] = useState(tasks); //* Sin LocalStorage
+	const [todoTask, setTodoTask] = useState(
+		() => JSON.parse(localStorage.getItem("todos")) || []
+	);
+
+	useEffect(() => {
+		localStorage.setItem("todos", JSON.stringify(todoTask));
+	}, [todoTask]);
+
+	// ? add and delete Todos functions
 	const addTodo = (newTodo) => {
 		setTodoTask([...todoTask, newTodo]);
 	};
