@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Box, Button, Input, Stack } from "@chakra-ui/react";
+import { Box, Button, Input, Stack, useToast } from "@chakra-ui/react";
 import { nanoid } from "nanoid";
 
 export const AddTodo = ({ addTodo }) => {
 	const [content, setContent] = useState("");
+	const toast = useToast();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -16,6 +17,14 @@ export const AddTodo = ({ addTodo }) => {
 
 			addTodo(todo);
 			setContent("");
+		} else {
+			toast({
+				title: "No content.",
+				description: "add a task.",
+				status: "error",
+				duration: 2000,
+				isClosable: true
+			});
 		}
 	};
 
@@ -26,7 +35,6 @@ export const AddTodo = ({ addTodo }) => {
 					placeholder="Enter your Task"
 					variant="filled"
 					value={content}
-					required
 					onChange={(e) => setContent(e.target.value)}
 				/>
 				<Button type="submit" colorScheme="pink" px={8}>
