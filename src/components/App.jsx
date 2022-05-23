@@ -16,15 +16,15 @@ function App() {
 		setTodoTask([...todoTask, newTodo]);
 	};
 
-  const deleteTodo=(id)=>{
-      const newTodos= todoTask.filter((el)=>el.id!==id)
-      setTodoTask(newTodos)
-  }
+	const deleteTodo = (id) => {
+		const newTodos = todoTask.filter((el) => el.id !== id);
+		setTodoTask(newTodos);
+	};
 
 	return (
 		<Box>
 			<main>
-				<Stack align="center">
+				<Stack align="center" gap={6}>
 					<Heading
 						as="h1"
 						textAlign="center"

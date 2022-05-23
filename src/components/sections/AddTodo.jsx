@@ -1,5 +1,6 @@
-import { Button, Input, Stack } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { Box, Button, Input, Stack } from "@chakra-ui/react";
+import { nanoid } from "nanoid";
 
 export const AddTodo = ({ addTodo }) => {
 	const [content, setContent] = useState("");
@@ -9,15 +10,16 @@ export const AddTodo = ({ addTodo }) => {
 		// console.log(content)
 
 		const todo = {
-			id: 4,
+			id: nanoid(),
 			body: content
 		};
 
 		addTodo(todo);
+		setContent("");
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
+		<Box as="form" onSubmit={handleSubmit}>
 			<Stack direction="row">
 				<Input
 					placeholder="Enter your Task"
@@ -29,6 +31,6 @@ export const AddTodo = ({ addTodo }) => {
 					Add Todo
 				</Button>
 			</Stack>
-		</form>
+		</Box>
 	);
 };
