@@ -30,12 +30,13 @@ function App() {
 
 	// ? add and delete Todos functions
 	const addTodo = (newTodo) => {
-		setTodoTask([...todoTask, newTodo]);
+		setTodoTask((todoTask) => [...todoTask, newTodo]);
 	};
 
 	const deleteTodo = (id) => {
-		const newTodos = todoTask.filter((el) => el.id !== id);
-		setTodoTask(newTodos);
+		// const newTodos = todoTask.filter((el) => el.id !== id);
+		// setTodoTask(()=>newTodos);
+		setTodoTask((todos) => todos.filter((todo) => todo.id !== id));
 	};
 
 	// ?Theme Dark and Ligth
