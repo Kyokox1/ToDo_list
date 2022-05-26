@@ -1,3 +1,4 @@
+import React from "react";
 import {
 	Badge,
 	Box,
@@ -7,7 +8,6 @@ import {
 	StackDivider,
 	Text
 } from "@chakra-ui/react";
-import React from "react";
 import { FaTrash } from "react-icons/fa";
 
 export const TodoList = ({ todoTask, deleteTodo }) => {

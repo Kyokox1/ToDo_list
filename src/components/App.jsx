@@ -21,7 +21,7 @@ function App() {
 
 	// const [todoTask, setTodoTask] = useState(tasks); //* Sin LocalStorage
 	const [todoTask, setTodoTask] = useState(
-		() => JSON.parse(localStorage.getItem("todos")) || []
+		() => JSON.parse(localStorage.getItem("todos")) || tasks
 	);
 
 	useEffect(() => {
