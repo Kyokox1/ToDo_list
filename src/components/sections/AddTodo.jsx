@@ -18,9 +18,14 @@ export const AddTodo = ({ addTodo, editTodo, updateTodo }) => {
 		if (content) {
 			const todo = {
 				id: nanoid(),
-				body: content
+				body: content,
+				completed: false
 			};
-			if (editTodo) updateTodo({ ...todo, id: editTodo.id });
+			if (editTodo)
+				updateTodo({
+					...editTodo,
+					body: content
+				});
 			if (!editTodo) addTodo(todo);
 			setContent("");
 		} else {

@@ -2,6 +2,7 @@ import React from "react";
 import {
 	Badge,
 	Box,
+	Checkbox,
 	HStack,
 	IconButton,
 	Stack,
@@ -10,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { FaTrash } from "react-icons/fa";
 
-export const TodoList = ({ todoTask, deleteTodo, setEditTodo }) => {
+export const TodoList = ({ todoTask, deleteTodo, setEditTodo, toggleTodo }) => {
 	return (
 		<>
 			{todoTask.length > 0 ? (
@@ -28,12 +29,27 @@ export const TodoList = ({ todoTask, deleteTodo, setEditTodo }) => {
 							pb={2}
 							// borderBottom={i !== todoTask.length - 1 && "2px #00000020 solid"} //* Solucion sin aplicar el "StackDivider" de arriba.
 						>
-							<Text
-								maxW={{ base: "80%", md: "90%" }}
-								onDoubleClick={() => setEditTodo(task)}
+							<HStack
+								maxW={{
+									base: "75%",
+									md: "85%",
+									lg: "90%"
+								}}
 							>
-								{task.body}
-							</Text>
+								<Checkbox
+									onChange={() => toggleTodo(task.id)}
+									defaultChecked={task.completed}
+								/>
+								<Text
+									maxW="100%"
+									textDecorationLine={
+										task.completed && "line-through"
+									}
+									onDoubleClick={() => setEditTodo(task)}
+								>
+									{task.body}
+								</Text>
+							</HStack>
 							<IconButton
 								icon={<FaTrash />}
 								isRound="true"

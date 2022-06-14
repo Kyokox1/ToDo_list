@@ -13,10 +13,10 @@ import { AddTodo } from "./sections/AddTodo";
 
 function App() {
 	const tasks = [
-		{ id: 1, body: "make the bed" },
-		{ id: 2, body: "Feed the cat" },
-		{ id: 3, body: "Eat breakfast" },
-		{ id: 4, body: "Program" }
+		{ id: 1, body: "make the bed", completed: false },
+		{ id: 2, body: "Feed the cat", completed: false },
+		{ id: 3, body: "Eat breakfast", completed: false },
+		{ id: 4, body: "Program", completed: false }
 	];
 
 	// const [todoTask, setTodoTask] = useState(tasks); //* Sin LocalStorage
@@ -52,6 +52,16 @@ function App() {
 		setEditTodo(null);
 	};
 
+	// ? todos completed
+
+	const toggleTodo = (id) => {
+		setTodoTask((todos) =>
+			todos.map((todo) =>
+				todo.id === id ? { ...todo, completed: !todo.completed } : todo
+			)
+		);
+	};
+
 	// ?Theme Dark and Ligth
 
 	const { colorMode, toggleColorMode } = useColorMode();
@@ -73,6 +83,7 @@ function App() {
 						todoTask={todoTask}
 						deleteTodo={deleteTodo}
 						setEditTodo={setEditTodo}
+						toggleTodo={toggleTodo}
 					/>
 
 					<AddTodo
