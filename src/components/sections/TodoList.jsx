@@ -10,12 +10,12 @@ import {
 } from "@chakra-ui/react";
 import { FaTrash } from "react-icons/fa";
 
-export const TodoList = ({ todoTask, deleteTodo }) => {
+export const TodoList = ({ todoTask, deleteTodo, setEditTodo }) => {
 	return (
 		<>
 			{todoTask.length > 0 ? (
 				<Stack
-					w="60%"
+					w={{ xl: "60%", lg: "70%", md: "80%", base: "90%" }}
 					p={3}
 					outline="2px #00000020 solid"
 					borderRadius="xl"
@@ -28,7 +28,12 @@ export const TodoList = ({ todoTask, deleteTodo }) => {
 							pb={2}
 							// borderBottom={i !== todoTask.length - 1 && "2px #00000020 solid"} //* Solucion sin aplicar el "StackDivider" de arriba.
 						>
-							<Text>{task.body}</Text>
+							<Text
+								maxW={{ base: "80%", md: "90%" }}
+								onDoubleClick={() => setEditTodo(task)}
+							>
+								{task.body}
+							</Text>
 							<IconButton
 								icon={<FaTrash />}
 								isRound="true"

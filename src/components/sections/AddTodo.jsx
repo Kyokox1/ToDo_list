@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Input, Stack, useToast } from "@chakra-ui/react";
 import { nanoid } from "nanoid";
 
-export const AddTodo = ({ addTodo }) => {
+export const AddTodo = ({ addTodo, editTodo, updateTodo }) => {
 	const [content, setContent] = useState("");
 	const toast = useToast();
+
+	useEffect(() => {
+		if (editTodo) {
+			setContent(editTodo.body);
+		}
+	}, [editTodo]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -14,8 +20,8 @@ export const AddTodo = ({ addTodo }) => {
 				id: nanoid(),
 				body: content
 			};
-
-			addTodo(todo);
+			if (editTodo) updateTodo({ ...todo, id: editTodo.id });
+			if (!editTodo) addTodo(todo);
 			setContent("");
 		} else {
 			toast({
@@ -29,16 +35,25 @@ export const AddTodo = ({ addTodo }) => {
 	};
 
 	return (
-		<Box as="form" onSubmit={handleSubmit} w="50%">
-			<Stack direction="row">
+		<Box
+			as="form"
+			onSubmit={handleSubmit}
+			w={{ base: "90%", md: "80%", lg: "70%", xl: "50%" }}
+		>
+			<Stack direction={{ base: "column", lg: "row" }}>
 				<Input
 					placeholder="Enter your Task"
 					variant="filled"
 					value={content}
+					autoFocus
 					onChange={(e) => setContent(e.target.value)}
 				/>
-				<Button type="submit" colorScheme="pink" px={8}>
-					Add Todo
+				<Button
+					type="submit"
+					colorScheme={!editTodo ? "pink" : "green"}
+					px={8}
+				>
+					{!editTodo ? "Add Todo" : "Edit Todo"}
 				</Button>
 			</Stack>
 		</Box>

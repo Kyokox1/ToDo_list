@@ -28,7 +28,13 @@ function App() {
 		localStorage.setItem("todos", JSON.stringify(todoTask));
 	}, [todoTask]);
 
-	// ? add and delete Todos functions
+	// ? Editar Todo.
+
+	const [editTodo, setEditTodo] = useState(null);
+
+	// console.log(editTodo);
+
+	// ? add ,delete and update Todos functions
 	const addTodo = (newTodo) => {
 		setTodoTask((todoTask) => [...todoTask, newTodo]);
 	};
@@ -37,6 +43,13 @@ function App() {
 		// const newTodos = todoTask.filter((el) => el.id !== id);
 		// setTodoTask(()=>newTodos);
 		setTodoTask((todos) => todos.filter((todo) => todo.id !== id));
+	};
+
+	const updateTodo = (data) => {
+		setTodoTask((todos) =>
+			todos.map((todo) => (todo.id === data.id ? data : todo))
+		);
+		setEditTodo(null);
 	};
 
 	// ?Theme Dark and Ligth
@@ -56,19 +69,31 @@ function App() {
 						Todo Application
 					</Heading>
 
-					<TodoList todoTask={todoTask} deleteTodo={deleteTodo} />
+					<TodoList
+						todoTask={todoTask}
+						deleteTodo={deleteTodo}
+						setEditTodo={setEditTodo}
+					/>
 
-					<AddTodo addTodo={addTodo} />
+					<AddTodo
+						addTodo={addTodo}
+						updateTodo={updateTodo}
+						editTodo={editTodo}
+					/>
 				</Stack>
 
 				<IconButton
 					icon={
-						colorMode === "light" ? <BsMoonStarsFill /> : <BsSunFill />
+						colorMode === "light" ? (
+							<BsMoonStarsFill />
+						) : (
+							<BsSunFill />
+						)
 					}
 					onClick={toggleColorMode}
 					pos="absolute"
-					top="1vh"
-					right="1vw"
+					top={{ base: "2vh", lg: "1.5vh" }}
+					right={{ base: "2vh", lg: "1.5vh" }}
 					isRound="true"
 					zIndex="100"
 				/>
